@@ -198,7 +198,8 @@ App.Utils.CalendarDefaultView = (function () {
                 );
                 $unavailabilitiesModal.find('#unavailability-id').val(unavailability.id);
                 $unavailabilitiesModal.find('#unavailability-provider').val(unavailability.id_users_provider);
-                $unavailabilitiesModal.find('#unavailability-notes').val(unavailability.notes);
+                $unavailabilitiesModal.find('#unavailability-summary').val(unavailability.notes.split(';$;')[0] || '');
+                $unavailabilitiesModal.find('#unavailability-description').val(unavailability.notes.split(';$;')[1] || '');
                 $unavailabilitiesModal.modal('show');
             }
         });
@@ -430,10 +431,19 @@ App.Utils.CalendarDefaultView = (function () {
 
                     $('<strong/>', {
                         'class': 'd-inline-block me-2',
+                        'text': lang('summary'),
+                    }),
+                    $('<span/>', {
+                        'text': getEventNotes(info.event).split(';$;')[0] || '-',
+                    }),
+
+                    $('<br/>'),
+                    $('<strong/>', {
+                        'class': 'd-inline-block me-2',
                         'text': lang('notes'),
                     }),
                     $('<span/>', {
-                        'text': getEventNotes(info.event),
+                        'text': getEventNotes(info.event).split(';$;')[1] || '-',
                     }),
                     $('<br/>'),
 
@@ -704,10 +714,19 @@ App.Utils.CalendarDefaultView = (function () {
 
                     $('<strong/>', {
                         'class': 'd-inline-block me-2',
+                        'text': lang('summary'),
+                    }),
+                    $('<span/>', {
+                        'text': getEventNotes(info.event).split(';$;')[0] || '-',
+                    }),
+                    $('<br/>'),
+
+                    $('<strong/>', {
+                        'class': 'd-inline-block me-2',
                         'text': lang('notes'),
                     }),
                     $('<span/>', {
-                        'text': getEventNotes(info.event),
+                        'text': getEventNotes(info.event).split(';$;')[1] || '-',
                     }),
                     $('<br/>'),
 
@@ -1234,7 +1253,7 @@ App.Utils.CalendarDefaultView = (function () {
                 // Add custom unavailability periods (they are always displayed on the calendar, even if the provider
                 // won't work on that day).
                 response.unavailabilities.forEach((unavailability) => {
-                    let notes = unavailability.notes ? ' - ' + unavailability.notes : '';
+                    let notes = unavailability.notes ? ' - ' + unavailability.notes.split(';$;')[0] : '';
 
                     if (unavailability.notes && unavailability.notes.length > 30) {
                         notes = ' - ' + unavailability.notes.substring(0, 30) + '...';

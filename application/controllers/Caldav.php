@@ -207,7 +207,7 @@ class Caldav extends EA_Controller
                 if ($is_different) {
                     $local_event['start_datetime'] = $caldav_event_start->format('Y-m-d H:i:s');
                     $local_event['end_datetime'] = $caldav_event_end->format('Y-m-d H:i:s');
-                    $local_event['notes'] = $caldav_event['description'];
+                    $local_event['notes'] = $caldav_event['summary'].';$;'.$caldav_event['description'];
                     $events_model->save($local_event);
                 }
             } catch (Throwable) {
@@ -262,7 +262,7 @@ class Caldav extends EA_Controller
                 ->where([
                     'start_datetime' => $caldav_event['start_datetime'],
                     'end_datetime' => $caldav_event['end_datetime'],
-                    'notes' => $caldav_event['summary'] . ' ' . $caldav_event['description'],
+                    'notes' => $caldav_event['summary'] . ';$;' . $caldav_event['description'],
                     'id_users_provider' => $provider_id,
                 ])
                 ->get()
@@ -281,7 +281,7 @@ class Caldav extends EA_Controller
                 'start_datetime' => $caldav_event['start_datetime'],
                 'end_datetime' => $caldav_event['end_datetime'],
                 'location' => $caldav_event['location'],
-                'notes' => $caldav_event['summary'] . ' ' . $caldav_event['description'],
+                'notes' => $caldav_event['summary'] . ';$;' . $caldav_event['description'],
                 'id_users_provider' => $provider_id,
                 'id_caldav_calendar' => $caldav_event['id'],
             ];

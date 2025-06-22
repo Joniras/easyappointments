@@ -266,7 +266,8 @@ App.Utils.CalendarTableView = (function () {
                 App.Utils.UI.setDateTimePickerValue($('#unavailability-end'), endMoment.toDate());
                 $unavailabilitiesModal.find('#unavailability-id').val(unavailability.id);
                 $unavailabilitiesModal.find('#unavailability-provider').val(unavailability.id_users_provider);
-                $unavailabilitiesModal.find('#unavailability-notes').val(unavailability.notes);
+                $unavailabilitiesModal.find('#unavailability-summary').val(unavailability.notes.split(';$;')[0] || '');
+                $unavailabilitiesModal.find('#unavailability-description').val(unavailability.notes.split(';$;')[1] || '');
 
                 $unavailabilitiesModal.modal('show');
             }

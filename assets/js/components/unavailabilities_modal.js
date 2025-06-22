@@ -22,7 +22,8 @@ App.Components.UnavailabilitiesModal = (function () {
     const $startDatetime = $('#unavailability-start');
     const $endDatetime = $('#unavailability-end');
     const $selectProvider = $('#unavailability-provider');
-    const $notes = $('#unavailability-notes');
+    const $summary = $('#unavailability-summary');
+    const $description = $('#unavailability-description');
     const $saveUnavailability = $('#save-unavailability');
     const $insertUnavailability = $('#insert-unavailability');
     const $selectFilterItem = $('#select-filter-item');
@@ -104,7 +105,7 @@ App.Components.UnavailabilitiesModal = (function () {
             const unavailability = {
                 start_datetime: startDateTimeMoment.format('YYYY-MM-DD HH:mm:ss'),
                 end_datetime: endDateTimeMoment.format('YYYY-MM-DD HH:mm:ss'),
-                notes: $unavailabilitiesModal.find('#unavailability-notes').val(),
+                notes: $unavailabilitiesModal.find('#unavailability-summary').val()+';$;' + $unavailabilitiesModal.find('#unavailability-description').val(),
                 id_users_provider: $selectProvider.val(),
             };
 
@@ -194,7 +195,8 @@ App.Components.UnavailabilitiesModal = (function () {
         $endDatetime.val(end);
 
         // Clear the unavailability notes field.
-        $notes.val('');
+        $summary.val('');
+        $description.val('');
     }
 
     /**
