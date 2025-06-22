@@ -183,7 +183,7 @@ class Ics_file
         return $calendarExport->getStream();
     }
 
-    public function get_unavailability_stream(array $unavailability, array $provider): string
+    public function get_unavailability_stream(array $unavailability, array $provider, ): string
     {
         $unavailability_timezone = new DateTimeZone($provider['timezone']);
 
@@ -193,15 +193,25 @@ class Ics_file
 
         // Set up the event.
         $event = new CalendarEvent();
-
         $event
             ->setStart($unavailability_start)
             ->setEnd($unavailability_end)
-            ->setStatus('CONFIRMED')
-            ->setSummary('Unavailability')
-            ->setUid($unavailability['id_caldav_calendar'] ?: $this->generate_uid($unavailability['id']));
+            ->setStatus('CONFIRMED');
 
-        $event->setDescription(str_replace("\n", "\\n", (string) $unavailability['notes']));
+        // Handle notes: can be empty, only summary, or summary;description
+        $summary = 'Unavailability';
+        $description = '';
+
+        if (isset($unavailability['notes']) && $unavailability['notes'] !== '') {
+            $parts = explode(';$;', $unavailability['notes'], 2);
+            $summary = trim($parts[0]) !== '' ? $parts[0] : $summary;
+            $description = isset($parts[1]) ? $parts[1] : '';
+        }
+
+        $event
+            ->setSummary($summary)
+            ->setDescription($description)
+            ->setUid($unavailability['id_caldav_calendar'] ?: $this->generate_uid($unavailability['id']));
 
         // Set the organizer.
         $organizer = new Organizer(new Formatter());

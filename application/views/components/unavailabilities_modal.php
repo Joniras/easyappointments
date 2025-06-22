@@ -71,14 +71,18 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="mb-3">
-                            <label for="unavailability-notes" class="form-label">
+                            <label for="unavailability-summary" class="form-label">
+                                <?= lang('summary') ?>
+                            </label>
+                            <input type="text" id="unavailability-summary"  class="form-control"></inp>
+                        </div>
+                        <div class="mb-3">
+                            <label for="unavailability-description" class="form-label">
                                 <?= lang('notes') ?>
                             </label>
-                            <textarea id="unavailability-notes" rows="3" class="form-control"></textarea>
+                            <textarea id="unavailability-description" rows="3" class="form-control"></textarea>
                         </div>
-
                         <?php slot('after_primary_unavailability_fields'); ?>
                     </fieldset>
                 </form>
