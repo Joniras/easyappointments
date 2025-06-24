@@ -367,6 +367,11 @@ App.Utils.CalendarDefaultView = (function () {
             $popoverTarget.popover('dispose');
         }
 
+        if(info.event.extendedProps.data.read_only == "1" ){
+            App.Layouts.Backend.displayNotification(lang('blocker_cannot_be_edited'));
+            return;
+        }
+
         let $html;
         let displayEdit;
         let displayDelete;
@@ -952,6 +957,12 @@ App.Utils.CalendarDefaultView = (function () {
             return;
         }
 
+        if(info.event.extendedProps.data.read_only == "1" ){
+            info.revert();
+            App.Layouts.Backend.displayNotification(lang('blocker_cannot_be_moved'));
+            return;
+        }
+
         if ($notification.is(':visible')) {
             $notification.hide('bind');
         }
@@ -1260,7 +1271,7 @@ App.Utils.CalendarDefaultView = (function () {
                     }
 
                     const unavailabilityEvent = {
-                        title: lang('unavailability') + notes,
+                        title: (unavailability.read_only=="1"?lang('blocker'):lang('unavailability'))+(unavailability.id_caldav_block_server	?( " ("+unavailability.id_caldav_block_server+")"):"") + notes,
                         start: moment(unavailability.start_datetime).toDate(),
                         end: moment(unavailability.end_datetime).toDate(),
                         allDay: false,
