@@ -47,6 +47,8 @@ class Services_model extends EA_Model
         'attendantsNumber' => 'attendants_number',
         'isPrivate' => 'is_private',
         'serviceCategoryId' => 'id_service_categories',
+        'additionalName' => 'additional_name',
+        'additionalDescription' => 'additional_description',
     ];
 
     /**
@@ -416,6 +418,8 @@ class Services_model extends EA_Model
             'description' => $service['description'],
             'location' => $service['location'],
             'availabilitiesType' => $service['availabilities_type'],
+            'additionalName' => $service['additional_name'],
+            'additionalDescription' => $service['additional_description'],
             'attendantsNumber' => (int) $service['attendants_number'],
             'isPrivate' => (bool) $service['is_private'],
             'serviceCategoryId' =>
@@ -465,6 +469,14 @@ class Services_model extends EA_Model
 
         if (array_key_exists('availabilitiesType', $service)) {
             $decoded_resource['availabilities_type'] = $service['availabilitiesType'];
+        }
+
+        if (array_key_exists('additionalDescription', $service)) {
+            $decoded_resource['additional_description'] = $service['additionalDescription'];
+        }
+
+        if (array_key_exists('additionalName', $service)) {
+            $decoded_resource['additional_name'] = $service['additionalName'];
         }
 
         if (array_key_exists('attendantsNumber', $service)) {

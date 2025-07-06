@@ -163,9 +163,22 @@
 
             <div class="mb-3">
                 <label class="form-label" for="description">
-                    <?= lang('description') ?>
+                    <?= lang('description_appointment') ?>
                 </label>
                 <textarea id="description" rows="4" class="form-control" disabled></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="additional-name">
+                    <?= lang('additional_name') ?>
+                </label>
+                <input id="additional-name" class="form-control" maxlength="128" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="additional-description">
+                    <?= lang('additional_description') ?>
+                </label>
+                <textarea id="additional-description" rows="4" class="form-control" disabled></textarea>
             </div>
 
             <?php slot('after_primary_fields'); ?>

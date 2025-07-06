@@ -10,6 +10,9 @@
     <div class="frame-container">
 
         <h2 class="frame-title"><?= lang('appointment_date_and_time') ?></h2>
+        <div id="service-time-description" class="text-center" >
+
+        </div>
 
         <div class="row frame-content">
             <div class="col-12 col-md-6">
