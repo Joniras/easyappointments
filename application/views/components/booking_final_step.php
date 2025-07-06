@@ -20,9 +20,11 @@
             <div id="customer-details" class="col-12 col-md-6 text-center text-md-end">
                 <!-- JS -->
             </div>
+            <div id="additional-infos" class="col-12 text-start">
+                <!-- JS -->
+            </div>
        
         </div>
-
         <?php slot('after_details'); ?>
         
         <?php if (setting('require_captcha')): ?>
@@ -71,7 +73,10 @@
 
         <?php slot('after_select_policies'); ?>
     </div>
+    <div>
 
+
+    </div>
     <div class="command-buttons">
         <button type="button" id="button-back-4" class="btn button-back btn-outline-secondary"
                 data-step_index="4">

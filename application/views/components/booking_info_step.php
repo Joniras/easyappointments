@@ -24,7 +24,7 @@
 <div id="wizard-frame-3" class="wizard-frame" style="display:none;">
     <div class="frame-container">
 
-        <h2 class="frame-title"><?= lang('customer_information') ?></h2>
+        <h2 class="frame-title"><?= lang('contact_information') ?></h2>
 
         <div class="row frame-content">
             <div class="col-12 col-md-6 field-col mx-auto">

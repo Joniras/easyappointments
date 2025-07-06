@@ -165,6 +165,7 @@ App.Pages.Booking = (function () {
 
         App.Utils.UI.setDateTimePickerValue($selectDate, new Date());
 
+
         const browserTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const isTimezoneSupported = $selectTimezone.find(`option[value="${browserTimezone}"]`).length > 0;
         $selectTimezone.val(isTimezoneSupported ? browserTimezone : 'UTC');
@@ -180,6 +181,17 @@ App.Pages.Booking = (function () {
             $selectService.find('option[value=""]').remove();
             const firstServiceId = $selectService.find('option:first').attr('value');
             $selectService.val(firstServiceId).trigger('change');
+        }
+                
+        const serviceId = $selectService.val();
+        console.log('serviceId', serviceId);
+        const service = vars('available_services').find(
+                    (availableService) => Number(availableService.id) === Number(serviceId),
+                );
+        console.log('service', service,$('#service-description'));
+        // setup the service description 
+        if( service ) {
+            $('#service-time-description').html(service.description);
         }
 
         // If the manage mode is true, the appointment data should be loaded by default.
@@ -776,6 +788,20 @@ App.Pages.Booking = (function () {
                 </div>
             </div>
         `);
+        if (service.additional_name || service.additional_description) {
+            const additionalName = service.additional_name
+                ? `<div class="mb-2 fw-bold fs-3">${service.additional_name}</div>`
+                : '';
+            const additionalDescription = service.additional_description
+                ? `<div class="mb-2">${service.additional_description}</div>`
+                : '';
+            $('#additional-infos').html(`
+                <div class="mt-2">
+                    ${additionalName}
+                    ${additionalDescription}
+                </div>
+            `);
+        }
 
         // Update appointment form data for submission to server when the user confirms the appointment.
 

@@ -33,6 +33,7 @@
 </head>
 
 <body>
+<div id="background-cover"></div>
 <div id="main" class="container">
     <div class="row wrapper">
         <div id="book-appointment-wizard" class="col-12 col-lg-10 col-xl-8 col-xxl-7">
