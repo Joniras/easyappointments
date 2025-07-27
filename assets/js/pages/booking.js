@@ -206,7 +206,7 @@ App.Pages.Booking = (function () {
                 .fadeIn();
         } else {
             // Check if a specific service was selected (via URL parameter).
-            const selectedServiceId = App.Utils.Url.queryParam('service');
+            let selectedServiceId = App.Utils.Url.queryParam('service');
 
             if (selectedServiceId && $selectService.find('option[value="' + selectedServiceId + '"]').length > 0) {
                 $selectService.val(selectedServiceId);
@@ -215,7 +215,7 @@ App.Pages.Booking = (function () {
             $selectService.trigger('change'); // Load the available hours.
 
             // Check if a specific provider was selected.
-            const selectedProviderId = App.Utils.Url.queryParam('provider');
+            let selectedProviderId = App.Utils.Url.queryParam('provider');
 
             if (selectedProviderId && $selectProvider.find('option[value="' + selectedProviderId + '"]').length === 0) {
                 // Select a service of this provider in order to make the provider available in the select box.
@@ -231,7 +231,15 @@ App.Pages.Booking = (function () {
             if (selectedProviderId && $selectProvider.find('option[value="' + selectedProviderId + '"]').length > 0) {
                 $selectProvider.val(selectedProviderId).trigger('change');
             }
-
+            if(selectedServiceId && vars('available_providers').length === 1){
+                $selectProvider.val(vars('available_providers')[0].id);
+                selectedProviderId = vars('available_providers')[0].id;
+            }
+            if(selectedProviderId && vars('available_services').length === 1){
+                $selectService.val(vars('available_services')[0].id);
+                selectedServiceId = vars('available_services')[0].id;
+            }
+            
             if (
                 (selectedServiceId && selectedProviderId) ||
                 (vars('available_services').length === 1 && vars('available_providers').length === 1)
