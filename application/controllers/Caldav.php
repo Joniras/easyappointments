@@ -486,7 +486,7 @@ class Caldav extends EA_Controller
                     'start_datetime' => $event['start_datetime'],
                     'end_datetime' => $event['end_datetime'],
                     'location' => $event['location'],
-                    'notes' => $event['summary'],
+                    'notes' => $event['summary'] . ';$;' . $event['description'],
                     'id_users_provider' => $provider_id,
                     'id_services' => null,
                     'id_users_customer' => null,
