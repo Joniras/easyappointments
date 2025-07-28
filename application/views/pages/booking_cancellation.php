@@ -13,10 +13,6 @@
         <?= lang('appointment_cancelled') ?>
     </p>
 
-    <a href="<?= site_url() ?>" class="btn btn-primary btn-large">
-        <i class="fas fa-calendar-alt me-2"></i>
-        <?= lang('go_to_booking_page') ?>
-    </a>
 </div>
 
 <?php end_section('content'); ?>
