@@ -85,26 +85,24 @@ class Ics_file
             $location->setName((string) $service['location']);
             $event->addLocation($location);
         }
+        $addTitle = "";
+        if (!empty($service['additional_name'])) {
+            $addTitle = $service['additional_name'].':';
+        }
 
         $description = [
-            '',
-            lang('provider'),
-            '',
-            lang('name') . ': ' . $provider['first_name'] . ' ' . $provider['last_name'],
-            lang('email') . ': ' . $provider['email'],
-            lang('phone_number') . ': ' . $provider['phone_number'],
-            lang('address') . ': ' . $provider['address'],
-            lang('city') . ': ' . $provider['city'],
-            lang('zip_code') . ': ' . $provider['zip_code'],
-            '',
-            lang('customer'),
-            '',
+            $addTitle,
+            $service['additional_description'],
+            '------',
+            'Gebucht durch:',
             lang('name') . ': ' . $customer['first_name'] . ' ' . $customer['last_name'],
             lang('email') . ': ' . $customer['email'],
             lang('phone_number') . ': ' . ($customer['phone_number'] ?? '-'),
-            lang('address') . ': ' . $customer['address'],
-            lang('city') . ': ' . $customer['city'],
-            lang('zip_code') . ': ' . $customer['zip_code'],
+            '------',
+            lang('provider').':',
+            lang('name') . ': ' . $provider['first_name'] . ' ' . $provider['last_name'],
+            lang('email') . ': ' . $provider['email'],
+            lang('phone_number') . ': ' . $provider['phone_number'],
             '',
             lang('notes'),
             '',
