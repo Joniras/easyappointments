@@ -231,7 +231,20 @@ App.Pages.Booking = (function () {
             if (selectedProviderId && $selectProvider.find('option[value="' + selectedProviderId + '"]').length > 0) {
                 $selectProvider.val(selectedProviderId).trigger('change');
             }
-            if(selectedServiceId && vars('available_providers').length === 1){
+            if(selectedServiceId ){
+                let fittingProviderCount = 0;
+                fittingProviderCount = vars('available_providers').filter((provider) => {
+                    return provider.services.includes(Number(selectedServiceId));
+                }).length;
+                if(fittingProviderCount === 1){
+                    selectedProviderId = vars('available_providers').find((provider) => {
+                        return provider.services.includes(Number(selectedServiceId));
+                    }).id;
+                    $selectProvider.val(selectedProviderId).trigger('change');
+                }
+            }
+                 
+            if(selectedServiceId && vars('available_providers').length === 1 || fittingProviderCount === 1){
                 $selectProvider.val(vars('available_providers')[0].id);
                 selectedProviderId = vars('available_providers')[0].id;
             }
