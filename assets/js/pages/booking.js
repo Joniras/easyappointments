@@ -184,7 +184,6 @@ App.Pages.Booking = (function () {
         }
                 
         const serviceId = $selectService.val();
-        console.log('serviceId', serviceId);
         const service = vars('available_services').find(
                     (availableService) => Number(availableService.id) === Number(serviceId),
                 );
@@ -244,7 +243,7 @@ App.Pages.Booking = (function () {
                 }
             }
                  
-            if(selectedServiceId && vars('available_providers').length === 1 || fittingProviderCount === 1){
+            if(selectedServiceId && vars('available_providers').length === 1){
                 $selectProvider.val(vars('available_providers')[0].id);
                 selectedProviderId = vars('available_providers')[0].id;
             }
@@ -977,6 +976,11 @@ App.Pages.Booking = (function () {
 
         if (!service) {
             return; // Service not found
+        }
+
+        // setup the service description 
+        if( service ) {
+            $('#service-time-description').html(service.description);
         }
 
         // Render the additional service information
