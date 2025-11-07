@@ -2,9 +2,9 @@
 
 <?php section('content'); ?>
 
-<div class="container-fluid backend-page" id="webhooks-page">
+<div class="container backend-page" id="webhooks-page">
     <div class="row" id="webhooks">
-        <div id="filter-webhooks" class="filter-records col col-12 col-md-5">
+        <div id="filter-webhooks" class="filter-records col col-12 col-lg-5">
             <form class="mb-4">
                 <div class="input-group">
                     <input type="text" class="key form-control" aria-label="keyword">
@@ -20,20 +20,18 @@
                 <?= lang('webhooks') ?>
             </h4>
 
-            <?php slot('after_page_title'); ?>
-
             <div class="results">
                 <!-- JS -->
             </div>
         </div>
 
-        <div class="record-details column col-12 col-md-5">
+        <div class="record-details column col-12 col-lg-5">
             <div class="btn-toolbar mb-4">
                 <a href="<?= site_url('integrations') ?>" class="btn btn-outline-primary me-2">
                     <i class="fas fa-chevron-left me-2"></i>
                     <?= lang('back') ?>
                 </a>
-                
+
                 <div class="add-edit-delete-group btn-group">
                     <button id="add-webhook" class="btn btn-primary">
                         <i class="fas fa-plus-square me-2"></i>
@@ -59,7 +57,6 @@
                     </button>
                 </div>
 
-                <?php slot('after_page_actions'); ?>
             </div>
 
             <h4 class="text-black-50 mb-3 fw-light">
@@ -93,7 +90,7 @@
 
                 <input id="secret-header" class="form-control" disabled>
             </div>
-            
+
             <div class="mb-3">
                 <label class="form-label" for="secret-token">
                     <?= lang('secret_token') ?>
@@ -150,7 +147,6 @@
                 <textarea id="notes" rows="4" class="form-control" disabled></textarea>
             </div>
 
-            <?php slot('after_primary_fields'); ?>
         </div>
     </div>
 </div>

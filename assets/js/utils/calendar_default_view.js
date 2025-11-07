@@ -1534,6 +1534,7 @@ App.Utils.CalendarDefaultView = (function () {
             selectable: true,
             selectMirror: true,
             themeSystem: 'bootstrap5',
+            selectLongPressDelay: 100,
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',

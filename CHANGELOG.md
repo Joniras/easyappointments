@@ -5,6 +5,19 @@ developers to maintain and readjust their custom modifications on the main proje
 
 ## [Unreleased]
 
+### Changed
+
+- Make the phone number field of backend users optional (#1709)
+
+### Fixed
+
+- Cannot modify appointment if provider changes time zone (#1789)
+- Fix the customer appointment link so that it opens the modal even in the table calendar view (-)
+
+
+
+## [1.5.2] - 2025-08-26
+
 ### Fixed
 
 - Fix the GTag script URL html rendering (#1666)
@@ -16,6 +29,7 @@ developers to maintain and readjust their custom modifications on the main proje
 - Update unavailable dates after applying appointment data while rescheduling (#1662)
 - Make sure that any-provider does not include hidden providers while generating availability (#1733)
 - Provide "text" version of the emails in addition to HTML (#1711)
+- Trigger webhook requests when managing records via the API (#1676)
 
 
 ## [1.5.1] - 2025-01-20

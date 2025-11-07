@@ -16,7 +16,7 @@
  */
 ?>
 <div id="appointments-modal" class="modal fade">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title"><?= lang('edit_appointment_title') ?></h3>
@@ -46,7 +46,7 @@
                                         $has_category = false;
 
                                         foreach ($available_services as $service) {
-                                            if (!empty($service['category_id'])) {
+                                            if (!empty($service['service_category_id'])) {
                                                 $has_category = true;
                                                 break;
                                             }
@@ -56,12 +56,12 @@
                                             $grouped_services = [];
 
                                             foreach ($available_services as $service) {
-                                                if (!empty($service['category_id'])) {
-                                                    if (!isset($grouped_services[$service['category_name']])) {
-                                                        $grouped_services[$service['category_name']] = [];
+                                                if (!empty($service['service_category_id'])) {
+                                                    if (!isset($grouped_services[$service['service_category_name']])) {
+                                                        $grouped_services[$service['service_category_name']] = [];
                                                     }
 
-                                                    $grouped_services[$service['category_name']][] = $service;
+                                                    $grouped_services[$service['service_category_name']][] = $service;
                                                 }
                                             }
 
@@ -70,7 +70,7 @@
                                             $grouped_services['uncategorized'] = [];
 
                                             foreach ($available_services as $service) {
-                                                if ($service['category_id'] == null) {
+                                                if ($service['service_category_id'] == null) {
                                                     $grouped_services['uncategorized'][] = $service;
                                                 }
                                             }
@@ -78,7 +78,7 @@
                                             foreach ($grouped_services as $key => $group) {
                                                 $group_label =
                                                     $key !== 'uncategorized'
-                                                        ? e($group[0]['category_name'])
+                                                        ? e($group[0]['service_category_name'])
                                                         : 'Uncategorized';
 
                                                 if (count($group) > 0) {
@@ -108,8 +108,6 @@
                                     </select>
                                 </div>
 
-                                <?php slot('after_select_appointment_service'); ?>
-                              
                                 <div class="mb-3">
                                     <label for="select-provider" class="form-label">
                                         <?= lang('provider') ?>
@@ -117,8 +115,6 @@
                                     </label>
                                     <select id="select-provider" class="required form-select"></select>
                                 </div>
-
-                                <?php slot('after_select_appointment_provider'); ?>
 
                                 <div class="mb-3">
                                     <?php component('color_selection', ['attributes' => 'id="appointment-color"']); ?>
@@ -184,16 +180,20 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="appointment-notes" class="form-label"><?= lang('notes') ?></label>
-                                    <textarea id="appointment-notes" class="form-control" rows="3"></textarea>
+                                    <label for="appointment-notes" class="form-label">
+                                        <?= lang('notes') ?>
+                                        <?php if ($require_notes): ?>
+                                            <span class="text-danger">*</span>
+                                        <?php endif; ?>
+                                    </label>
+                                    <textarea id="appointment-notes" class="<?= $require_notes
+                                        ? 'required'
+                                        : '' ?> form-control" rows="3"></textarea>
                                 </div>
 
-                                <?php slot('after_primary_appointment_fields'); ?>
                             </div>
                         </div>
                     </fieldset>
-
-                    <?php slot('after_appointment_details'); ?>
 
                     <br>
 
@@ -287,7 +287,6 @@
 
                                 <?php component('custom_fields'); ?>
 
-                                <?php slot('after_primary_customer_custom_fields'); ?>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="mb-3">
@@ -340,26 +339,19 @@
                                 <div class="mb-3">
                                     <label for="customer-notes" class="form-label">
                                         <?= lang('notes') ?>
-                                        <?php if ($require_notes): ?>
-                                            <span class="text-danger">*</span>
-                                        <?php endif; ?>
                                     </label>
-                                    <textarea id="customer-notes" rows="2"
-                                              class="<?= $require_notes ? 'required' : '' ?> form-control"></textarea>
+                                    <textarea id="customer-notes" rows="2" class="form-control"></textarea>
                                 </div>
 
-                                <?php slot('after_primary_customer_fields'); ?>
                             </div>
                         </div>
                     </fieldset>
 
-                    <?php slot('after_customer_details'); ?>
                 </form>
             </div>
 
             <div class="modal-footer">
-                <?php slot('before_appointment_actions'); ?>
-                
+
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                     <?= lang('cancel') ?>
                 </button>

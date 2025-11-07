@@ -211,4 +211,38 @@ class EA_Model extends CI_Model
     {
         return $this->api_resource[$api_field] ?? null;
     }
+
+    /**
+     * Escape the order by statements in order to avoid SQL injection issues
+     *
+     * @param string|null $order_by
+     *
+     * @return string|null
+     */
+    function quote_order_by(?string $order_by): ?string
+    {
+        if (!$order_by) {
+            return null;
+        }
+
+        $parts = explode(',', $order_by);
+        $quoted_parts = [];
+
+        foreach ($parts as $part) {
+            $tokens = preg_split('/\s+/', trim($part));
+            $column = array_shift($tokens); // first token is column
+            $direction = strtoupper($tokens[0] ?? ''); // optional ASC/DESC
+
+            // Add backticks (or quotes) around column name
+            $column = '`' . str_replace('`', '', $column) . '`';
+
+            if ($direction === 'ASC' || $direction === 'DESC') {
+                $quoted_parts[] = $column . ' ' . $direction;
+            } else {
+                $quoted_parts[] = $column;
+            }
+        }
+
+        return implode(', ', $quoted_parts);
+    }
 }

@@ -7,7 +7,7 @@
 ?>
 
 <div id="ldap-import-modal" class="modal fade">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title"><?= lang('import') ?></h3>
@@ -22,7 +22,7 @@
                     </label>
                     <input id="ldap-import-ldap-dn" class="form-control required" maxlength="256">
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label" for="ldap-import-role-slug">
                         <?= lang('role') ?>
@@ -36,7 +36,7 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label" for="ldap-import-first-name">
                         <?= lang('first_name') ?>

@@ -8,7 +8,7 @@
 ?>
 
 <div id="unavailabilities-modal" class="modal fade">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title"><?= lang('new_unavailability_title') ?></h3>
@@ -28,8 +28,6 @@
                             <select id="unavailability-provider" class="form-select"></select>
                         </div>
 
-                        <?php slot('after_select_appointment_provider'); ?>
-                     
                         <div class="mb-3">
                             <label for="unavailability-start" class="form-label">
                                 <?= lang('start') ?>
@@ -88,8 +86,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <?php slot('after_unavailability_actions'); ?>
-                
+
                 <button class="btn btn-secondary" data-bs-dismiss="modal">
                     <?= lang('cancel') ?>
                 </button>

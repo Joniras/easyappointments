@@ -108,7 +108,8 @@ class Google extends EA_Controller
                 'company_name' => setting('company_name'),
                 'company_link' => setting('company_link'),
                 'company_email' => setting('company_email'),
-                'company_color' => !empty($company_color) && $company_color != DEFAULT_COMPANY_COLOR ? $company_color : null,
+                'company_color' =>
+                    !empty($company_color) && $company_color != DEFAULT_COMPANY_COLOR ? $company_color : null,
             ];
 
             $provider_timezone = new DateTimeZone($provider['timezone']);
@@ -223,7 +224,10 @@ class Google extends EA_Controller
                 $google_event_end = new DateTime($google_event->getEnd()->getDateTime());
                 $google_event_end->setTimezone($provider_timezone);
 
-                $appointment_results = $CI->appointments_model->get(['id_google_calendar' => $google_event->getId()]);
+                $appointment_results = $CI->appointments_model->get([
+                    'id_google_calendar' => $google_event->getId(),
+                    'id_users_provider' => $provider_id,
+                ]);
 
                 if (!empty($appointment_results)) {
                     continue;
@@ -231,6 +235,7 @@ class Google extends EA_Controller
 
                 $unavailability_results = $CI->unavailabilities_model->get([
                     'id_google_calendar' => $google_event->getId(),
+                    'id_users_provider' => $provider_id,
                 ]);
 
                 if (!empty($unavailability_results)) {
